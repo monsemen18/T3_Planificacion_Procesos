@@ -26,17 +26,6 @@ La ejecución continúa hasta que termina o un nuevo proceso con menor tiempo re
 - Favorece procesos cortos
 - Puede causar que procesos largos no se ejecuten
 
-## Como ejecutar 
-### Compilar 
-```
-gcc srtn/simuladorPlanProcesos.c -o bin/srtn
-```
-
-### Correr el programa 
-```
-./bin/srtn < Procesos.txt
-```
-
 ##  **Lottery Scheduling** 
 Es un algoritmo de planificación en el que se dan "tickets de lotería" a cada proceso y un número de lotería es elegido al azar para determinar el siguiente proceso a ejecutarse. El proceso se ejecuta durante un tiempo asignado y se vuelve a elegir un número para seleccionar el siguiente proceso.
 
@@ -47,12 +36,23 @@ Es un algoritmo de planificación en el que se dan "tickets de lotería" a cada 
 ## Como ejecutar
 ### Compilar
 ```
-gcc lottery/simuladorPlanProcesos.c -o bin/lottery
+mkdir -p build
+```
+```
+gcc srtn/simuladorPlanProcesos.c -o build/srtn
+```
+```
+gcc srtn/simuladorPlanProcesos.c -o build/lottery
 ```
 
 ### Correr el programa 
+#### SRTN
 ```
-./bin/lottery < Procesos.txt
+./build/srtn < Procesos.txt
+```
+#### Lottery Scheduling
+```
+./build/lottery < Procesos.txt
 ```
 
 ## Resultados
