@@ -42,7 +42,7 @@ mkdir -p build
 gcc srtn/simuladorPlanProcesos.c -o build/srtn
 ```
 ```
-gcc srtn/simuladorPlanProcesos.c -o build/lottery
+gcc lottery/simuladorPlanProcesos.c -o build/lottery
 ```
 
 ### Correr el programa 
