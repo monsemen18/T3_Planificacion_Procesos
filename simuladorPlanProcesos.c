@@ -20,11 +20,6 @@ typedef struct {
 void simulate_srtn(Process *p, int n){
     int completed = 0;  // procesos que ya terminaron
     int current_time = 0;
-    int total_time = 0;  // tiempo necesario para cada proceso
-
-    for (int i = 0; i < n; i++){
-        total_time += p[i].burst;
-    }
 
     // reseteamos variables, por si hace el otro algoritmo aqui
     for (int i = 0; i < n; i++) {
@@ -43,10 +38,12 @@ void simulate_srtn(Process *p, int n){
             if (p[i].arrival <= current_time && p[i].remaining > 0) {
                 if (idx == -1 || p[i].remaining < p[idx].remaining)  // yo tengo menor tiempo
                     idx = i;   // se hace el cambio 
+
             }
         }
 
         // ningun proceso esta listo en este momento (current_time)
+        // salta al proximo 
         if (idx == -1) {
             int next_arrival = -1;
             for (int i = 0; i < n; i++) {
@@ -79,19 +76,20 @@ void simulate_srtn(Process *p, int n){
     }
 
     // imprimimos resultados como tabla
-    printf("\n========== SRTF (Shortest Remaining Time First) ==========\n");
-    printf("%-6s %-10s %-10s %-18s %-20s %-14s %-14s\n",
-           "ID", "Arrival", "Burst", "Completion Time", "Turnaround Time", "Waiting Time", "Response Time");
-    printf("-----------------------------------------------------------------------------------------------\n");
+    printf("\n=============== SRTF (Shortest Remaining Time First) ===============\n");
+    printf("%-6s %-10s %-10s %-18s %-10s %-20s %-14s %-14s\n",
+           "ID", "Arrival", "Burst", "Completion Time", "Start Time ", "Turnaround Time", "Waiting Time", "Response Time");
+    printf("---------------------------------------------------------------------------------------------------------------\n");
 
     double total_tat = 0, total_wt = 0, total_rt = 0;
 
     for (int i = 0; i < n; i++) {
-        printf("P%-5d %-10d %-10d %-18d %-20d %-14d %-14d\n",
+        printf("P%-5d %-10d %-10d %-18d %-10d %-20d %-14d %-14d\n",
                p[i].id,
                p[i].arrival,
                p[i].burst,
                p[i].finish_time,
+               p[i].start_time,
                p[i].turnaround,
                p[i].waiting_time,
                p[i].response_time);
